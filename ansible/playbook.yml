@@ -1,0 +1,17 @@
+---
+- hosts: all
+  tasks:
+
+  - name: Update git.
+    shell: |
+      git init /home/DigitalOceanAW
+      cd /home/DigitalOceanAW
+      git remote add origin https://github.com/DigitalOceanAW/DigitalOceanAW
+      git fetch --all 
+      git pull origin master
+
+  - name: Move file to docker container.
+    shell: docker cp /home/DigitalOceanAW/python/echo.py echo:/home/echo.py
+
+  - name: Run the echo server.
+    shell: docker exec -itd echo python3 /home/echo.py
