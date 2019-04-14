@@ -1,0 +1,33 @@
+{
+  "builders":
+  [
+    {
+      "type": "digitalocean",
+      "droplet_name": "echoServer",
+      "snapshot_name": "echoServer",
+      "image": "ubuntu-18-04-x64",
+      "region": "sfo2",
+      "size": "512mb",
+      "ssh_username": "root"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "printf '\n'", "printf sleeping",
+        "sleep 7", "printf .",
+        "sleep 7", "printf .",
+        "sleep 7", "printf .",
+        "sleep 7", "printf '\n'",
+        "sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common",
+        "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
+        "sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\"",
+        "sudo apt-get update",
+        "sudo apt-get install docker-ce docker-ce-cli containerd.io -y",
+        "docker pull alpine",
+        "docker run -itd -p 80:80 --name echo --restart always alpine"
+      ]
+    }
+  ]
+}
