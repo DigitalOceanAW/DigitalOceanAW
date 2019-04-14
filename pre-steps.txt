@@ -1,0 +1,18 @@
+1. Make sure the old droplet and old images are deleted from the digital ocean
+   account for DigitalOceanAW.
+
+2. cd into DigitalOceanAW and run the command
+   "$(cat .secrets/BasicAccess_token)" to set environment variables.
+
+3. Enter the command "make"
+
+4. If prompted for input, simply type "yes" and enter - be careful not to
+   accidentally enter something else and have to start all over again.
+
+5. If the image is taking extra long to respond, manually demonstrate that
+   everything works by typing:
+
+       "curl -i -H POST <<IP>>/api/v1/echo -d 'arbitrary message'"
+
+   The IP is stored in terraform/ip.txt, or cd into terraform and type the
+   command "terraform output ip_addr".

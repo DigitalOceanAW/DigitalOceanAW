@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -i -H POST XXXX/api/v1/echo -d 'Is there an echo in here?'
